@@ -1,0 +1,5 @@
+{
+  "description": "A configuration path is a symlink whose target was removed.",
+  "command": ["cat", "config.yml"],
+  "expect": { "status": "root_cause", "root_cause": "broken_symlink", "minimum_confidence": "high", "exit_code": 1, "required_evidence": ["broken symbolic link"] }
+}

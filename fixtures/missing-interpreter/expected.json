@@ -1,0 +1,11 @@
+{
+  "description": "A script's #! interpreter does not exist (the kernel reports ENOENT for an existing file).",
+  "command": ["./tool.sh"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "missing_interpreter",
+    "minimum_confidence": "high",
+    "exit_code": 127,
+    "required_evidence": ["/opt/tracewhy-nonexistent/bin/interp"]
+  }
+}

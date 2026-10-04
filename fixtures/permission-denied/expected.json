@@ -1,0 +1,13 @@
+{
+  "description": "Scenario C: the file exists but the current user may not read it.",
+  "requires": ["root"],
+  "as_user": "nobody",
+  "command": ["cat", "secret.conf"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "permission_denied",
+    "minimum_confidence": "high",
+    "exit_code": 1,
+    "required_evidence": ["mode 600", "owner root"]
+  }
+}

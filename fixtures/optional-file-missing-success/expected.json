@@ -1,0 +1,6 @@
+{
+  "description": "False-positive guard: an optional .env is missing, the program falls back and succeeds.",
+  "requires": ["python3"],
+  "command": ["python3", "app.py"],
+  "expect": { "status": "succeeded", "exit_code": 0 }
+}

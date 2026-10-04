@@ -1,0 +1,49 @@
+[package]
+name = "tracewhy-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+# Not part of the main workspace (needs nightly + cargo-fuzz).
+[workspace]
+members = ["."]
+
+[dependencies]
+libfuzzer-sys = "0.4"
+tracewhy-tracer-strace = { path = "../crates/tracewhy-tracer-strace" }
+tracewhy-format = { path = "../crates/tracewhy-format" }
+tracewhy-redact = { path = "../crates/tracewhy-redact" }
+tracewhy-investigator-linux = { path = "../crates/tracewhy-investigator-linux" }
+
+[[bin]]
+name = "strace_parser"
+path = "fuzz_targets/strace_parser.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "whytrace_loader"
+path = "fuzz_targets/whytrace_loader.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "dns_decoder"
+path = "fuzz_targets/dns_decoder.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "elf_parser"
+path = "fuzz_targets/elf_parser.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "redactor"
+path = "fuzz_targets/redactor.rs"
+test = false
+doc = false

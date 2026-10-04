@@ -1,0 +1,6 @@
+{
+  "description": "Node.js: the code requires a package that package.json does not declare.",
+  "requires": ["node"],
+  "command": ["node", "index.js"],
+  "expect": { "status": "root_cause", "root_cause": "node_package_not_declared", "minimum_confidence": "high", "exit_code": 1, "required_evidence": ["does not declare"] }
+}

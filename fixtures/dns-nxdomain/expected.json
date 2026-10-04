@@ -1,0 +1,12 @@
+{
+  "description": "A hostname that does not exist (.invalid is reserved and never resolves).",
+  "requires": ["python3", "dns-nxdomain"],
+  "command": ["python3", "-c", "import socket; socket.create_connection(('db.tracewhy.invalid', 5432), timeout=3)"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "hostname_not_found",
+    "minimum_confidence": "high",
+    "exit_code": 1,
+    "required_evidence": ["NXDOMAIN"]
+  }
+}

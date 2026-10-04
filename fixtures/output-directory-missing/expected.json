@@ -1,0 +1,5 @@
+{
+  "description": "Writing a file into a directory that does not exist; the fix is to create the directory.",
+  "command": ["sh", "-c", "echo result > build/out/result.txt"],
+  "expect": { "status": "root_cause", "root_cause": "parent_missing", "minimum_confidence": "high", "exit_code": 2, "required_evidence": ["build"] }
+}

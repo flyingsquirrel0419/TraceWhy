@@ -1,0 +1,87 @@
+355804 1791087545.217551 execve("/usr/bin/sh", ["sh", "-c", "cat /nonexistent; nosuchcmd; exit 3"], 0x7ffcd2524258 /* 56 vars */) = 0
+355804 1791087545.218275 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+355804 1791087545.218378 openat(AT_FDCWD</home/user/proj>, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</etc/ld.so.cache>
+355804 1791087545.219738 openat(AT_FDCWD</home/user/proj>, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libc.so.6>
+355804 1791087545.220100 newfstatat(AT_FDCWD</home/user/proj>, "/home/user/proj", {st_mode=S_IFDIR|0755, st_size=4096, ...}, 0) = 0
+355804 1791087545.220135 newfstatat(AT_FDCWD</home/user/proj>, ".", {st_mode=S_IFDIR|0755, st_size=4096, ...}, 0) = 0
+355804 1791087545.220187 newfstatat(AT_FDCWD</home/user/proj>, "/root/.local/bin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220205 newfstatat(AT_FDCWD</home/user/proj>, "/root/.local/bin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220214 newfstatat(AT_FDCWD</home/user/proj>, "/home/user/.local/bin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220222 newfstatat(AT_FDCWD</home/user/proj>, "/root/.local/bin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220231 newfstatat(AT_FDCWD</home/user/proj>, "/root/.npm-global/bin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220240 newfstatat(AT_FDCWD</home/user/proj>, "/root/.bun/bin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220250 newfstatat(AT_FDCWD</home/user/proj>, "/home/user/.opencode/bin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220257 newfstatat(AT_FDCWD</home/user/proj>, "/home/user/.npm-global/bin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220265 newfstatat(AT_FDCWD</home/user/proj>, "/usr/local/sbin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220276 newfstatat(AT_FDCWD</home/user/proj>, "/usr/local/bin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220286 newfstatat(AT_FDCWD</home/user/proj>, "/usr/sbin/cat", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.220466 newfstatat(AT_FDCWD</home/user/proj>, "/usr/bin/cat", {st_mode=S_IFREG|0755, st_size=39384, ...}, 0) = 0
+355804 1791087545.220492 vfork( <unfinished ...>
+355805 1791087545.220603 execve("/usr/bin/cat", ["cat", "/nonexistent"], 0x62a90db72e18 /* 56 vars */ <unfinished ...>
+355804 1791087545.220968 <... vfork resumed>) = 355805
+355804 1791087545.220991 wait4(-1,  <unfinished ...>
+355805 1791087545.221287 <... execve resumed>) = 0
+355805 1791087545.221482 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+355805 1791087545.221536 openat(AT_FDCWD</home/user/proj>, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</etc/ld.so.cache>
+355805 1791087545.221792 openat(AT_FDCWD</home/user/proj>, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libc.so.6>
+355805 1791087545.222937 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/locale-archive>
+355805 1791087545.223137 openat(AT_FDCWD</home/user/proj>, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</etc/locale.alias>
+355805 1791087545.223401 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.223457 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_IDENTIFICATION>
+355805 1791087545.223643 openat(AT_FDCWD</home/user/proj>, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache>
+355805 1791087545.223902 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.223977 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_MEASUREMENT>
+355805 1791087545.224181 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.224238 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_TELEPHONE>
+355805 1791087545.224421 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.224475 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_ADDRESS>
+355805 1791087545.224656 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_NAME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.224728 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_NAME", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_NAME>
+355805 1791087545.224910 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_PAPER", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.224966 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_PAPER", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_PAPER>
+355805 1791087545.225152 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.225207 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_MESSAGES>
+355805 1791087545.225342 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES>
+355805 1791087545.225521 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.225576 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_MONETARY>
+355805 1791087545.225789 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.225846 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_COLLATE>
+355805 1791087545.226025 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_TIME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.226080 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_TIME", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_TIME>
+355805 1791087545.226259 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.226316 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_NUMERIC>
+355805 1791087545.226494 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+355805 1791087545.226549 openat(AT_FDCWD</home/user/proj>, "/usr/lib/locale/C.utf8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_CTYPE>
+355805 1791087545.226838 openat(AT_FDCWD</home/user/proj>, "/nonexistent", O_RDONLY) = -1 ENOENT (No such file or directory)
+355805 1791087545.226911 write(2</dev/pts/0>, "cat: ", 5) = 5
+355805 1791087545.226996 write(2</dev/pts/0>, "/nonexistent", 12) = 12
+355805 1791087545.227062 write(2</dev/pts/0>, ": No such file or directory", 27) = 27
+355805 1791087545.227127 write(2</dev/pts/0>, "\n", 1) = 1
+355805 1791087545.227264 exit_group(1)  = ?
+355805 1791087545.227374 +++ exited with 1 +++
+355804 1791087545.227413 <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s) == 1}], 0, NULL) = 355805
+355804 1791087545.227451 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=355805, si_uid=0, si_status=1, si_utime=0, si_stime=0} ---
+355804 1791087545.227510 wait4(-1, 0x7fff0b7c317c, WNOHANG, NULL) = -1 ECHILD (No child processes)
+355804 1791087545.227553 newfstatat(AT_FDCWD</home/user/proj>, "/root/.local/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227607 newfstatat(AT_FDCWD</home/user/proj>, "/root/.local/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227631 newfstatat(AT_FDCWD</home/user/proj>, "/home/user/.local/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227641 newfstatat(AT_FDCWD</home/user/proj>, "/root/.local/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227651 newfstatat(AT_FDCWD</home/user/proj>, "/root/.npm-global/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227659 newfstatat(AT_FDCWD</home/user/proj>, "/root/.bun/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227671 newfstatat(AT_FDCWD</home/user/proj>, "/home/user/.opencode/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227679 newfstatat(AT_FDCWD</home/user/proj>, "/home/user/.npm-global/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227706 newfstatat(AT_FDCWD</home/user/proj>, "/usr/local/sbin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227732 newfstatat(AT_FDCWD</home/user/proj>, "/usr/local/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227743 newfstatat(AT_FDCWD</home/user/proj>, "/usr/sbin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227757 newfstatat(AT_FDCWD</home/user/proj>, "/usr/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227770 newfstatat(AT_FDCWD</home/user/proj>, "/sbin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227778 newfstatat(AT_FDCWD</home/user/proj>, "/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227787 newfstatat(AT_FDCWD</home/user/proj>, "/usr/games/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227797 newfstatat(AT_FDCWD</home/user/proj>, "/usr/local/games/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227807 newfstatat(AT_FDCWD</home/user/proj>, "/snap/bin/nosuchcmd", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.227816 newfstatat(AT_FDCWD</home/user/proj>, "/opt/tool/bin", 0x7fff0b7c3220, 0) = -1 ENOENT (No such file or directory)
+355804 1791087545.228049 write(2</dev/pts/0>, "sh: 1: ", 7) = 7
+355804 1791087545.228089 write(2</dev/pts/0>, "nosuchcmd: not found", 20) = 20
+355804 1791087545.228102 write(2</dev/pts/0>, "\n", 1) = 1
+355804 1791087545.228116 exit_group(3)  = ?
+355804 1791087545.228199 +++ exited with 3 +++

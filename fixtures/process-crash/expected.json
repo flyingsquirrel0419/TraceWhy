@@ -1,0 +1,11 @@
+{
+  "description": "A child process crashes with SIGSEGV.",
+  "command": ["sh", "-c", "sh -c 'kill -SEGV $$'; exit 139"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "process_crashed",
+    "minimum_confidence": "medium",
+    "exit_code": 139,
+    "required_evidence": ["SIGSEGV"]
+  }
+}

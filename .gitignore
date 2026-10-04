@@ -1,0 +1,6 @@
+/target
+*.whytrace
+!fixtures/**/*.whytrace
+/fuzz/target
+/fuzz/corpus
+/fuzz/artifacts

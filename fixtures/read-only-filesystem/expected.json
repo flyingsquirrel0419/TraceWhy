@@ -1,0 +1,6 @@
+{
+  "description": "Writing to a filesystem mounted read-only.",
+  "requires": ["root", "mount"],
+  "command": ["sh", "-c", "echo x > ro/data.txt"],
+  "expect": { "status": "root_cause", "root_cause": "read_only_filesystem", "minimum_confidence": "high", "exit_code": 2, "required_evidence": ["mounted read-only"] }
+}

@@ -1,0 +1,10 @@
+# Runtime adapter rules. Observations of type "runtime" are produced by
+# runtime adapters (Node, Python); the adapter that produced the observation
+# proposes and scores its hypotheses.
+
+[[rule]]
+id = "runtime.adapter"
+description = "Delegate runtime-specific observations to their adapter."
+observation = "runtime"
+hypotheses = ["adapter"]
+investigate = []

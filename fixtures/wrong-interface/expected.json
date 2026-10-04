@@ -1,0 +1,6 @@
+{
+  "description": "The service listens on IPv4 loopback only, the client connects to IPv6 loopback.",
+  "requires": ["python3"],
+  "command": ["python3", "-c", "import socket; socket.create_connection(('::1', 47915))"],
+  "expect": { "status": "root_cause", "root_cause": "wrong_interface", "minimum_confidence": "high", "exit_code": 1, "required_evidence": ["127.0.0.1"] }
+}

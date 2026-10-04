@@ -1,0 +1,12 @@
+{
+  "description": "Scenario F: writing to a filesystem with no free space (a 256 KiB tmpfs).",
+  "requires": ["root", "mount"],
+  "command": ["dd", "if=/dev/zero", "of=full/big.bin", "bs=64k", "count=64"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "disk_full",
+    "minimum_confidence": "high",
+    "exit_code": 1,
+    "required_evidence": ["ENOSPC", "0 B free"]
+  }
+}

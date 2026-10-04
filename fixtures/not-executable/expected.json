@@ -1,0 +1,11 @@
+{
+  "description": "A script without the execute bit.",
+  "command": ["./run.sh"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "not_executable",
+    "minimum_confidence": "high",
+    "exit_code": 126,
+    "required_evidence": ["mode 644"]
+  }
+}

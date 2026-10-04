@@ -1,0 +1,10 @@
+{
+  "description": "Scenario J: secrets in argv and output never appear in the report, JSON or .whytrace.",
+  "requires": ["python3"],
+  "command": ["python3", "-c", "import sys; print('auth failed: token ghp_0123456789abcdefghijABCDEFGHIJ0123456789 url https://app:hunter22pw@db.example/x?api_key=k3y', file=sys.stderr); open('/nonexistent-dir/creds.json')", "--password", "hunter22pw"],
+  "expect": {
+    "status": "root_cause",
+    "exit_code": 1,
+    "forbidden_output": ["ghp_0123456789abcdefghijABCDEFGHIJ0123456789", "hunter22pw", "k3y"]
+  }
+}

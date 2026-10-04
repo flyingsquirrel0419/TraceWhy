@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: -D warnings
+
+jobs:
+  lint:
+    name: fmt + clippy
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+          targets: aarch64-unknown-linux-gnu
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --all --check
+      - run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - name: clippy (aarch64, catches c_char and other arch differences)
+        run: cargo clippy --workspace --all-targets --locked --target aarch64-unknown-linux-gnu -- -D warnings
+
+  test:
+    name: test (${{ matrix.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x86_64
+            os: ubuntu-24.04
+          - arch: aarch64
+            os: ubuntu-24.04-arm
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Install tracing and fixture tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends strace gcc python3 python3-jsonschema
+      - name: Pre-pull the Docker fixture image
+        run: docker pull postgres:16-alpine
+      - name: Unit, integration and fixture tests (unprivileged)
+        run: cargo test --workspace --locked
+      - name: Fixture corpus as root (permission, disk-full), all fixtures required
+        run: |
+          mkdir -p "$RUNNER_TEMP/traces"
+          sudo -E env "PATH=$PATH" "HOME=$HOME" "CARGO_HOME=$HOME/.cargo" "RUSTUP_HOME=$HOME/.rustup" \
+            "CARGO_TARGET_DIR=$RUNNER_TEMP/root-target" "TRACEWHY_REQUIRE_ALL=1" \
+            "TRACEWHY_FIXTURE_TRACES_DIR=$RUNNER_TEMP/traces" \
+            cargo test -p tracewhy-cli --test fixtures --locked
+      - name: Validate recorded traces against the JSON schema
+        run: python3 scripts/validate-whytrace.py "$RUNNER_TEMP/traces"
+      - name: Release build
+        run: cargo build --release --locked
+      - name: Smoke test the release binary
+        run: |
+          ./target/release/why --version
+          ./target/release/why doctor
+          ./target/release/why true
+          ./target/release/why --json tracewhy-ci-missing-command | python3 -c 'import json,sys; assert json.load(sys.stdin)["root_cause"]["kind"] == "command_not_in_path"' || exit 1
+
+  msrv:
+    name: MSRV (1.85)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.85
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build --workspace --locked
+
+  audit:
+    name: dependency audit
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-audit
+      - run: cargo audit --deny warnings

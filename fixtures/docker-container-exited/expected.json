@@ -1,0 +1,12 @@
+{
+  "description": "Scenario H / README demo: npm run dev fails because the postgres container from compose.yaml is stopped.",
+  "requires": ["docker", "docker-image:postgres:16-alpine", "node", "npm", "port-free:5432"],
+  "command": ["npm", "run", "dev"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "container_stopped",
+    "minimum_confidence": "high",
+    "exit_code": 1,
+    "required_evidence": ["ECONNREFUSED", "No process is listening on port 5432", "exited"]
+  }
+}

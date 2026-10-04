@@ -1,0 +1,18 @@
+[package]
+name = "tracewhy-adapter-python"
+description = "Python runtime adapter for TraceWhy"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+serde = { workspace = true }
+tracewhy-event = { workspace = true }
+tracewhy-core = { workspace = true }

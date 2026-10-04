@@ -1,0 +1,6 @@
+{
+  "description": "Regression: a Rust compile error must not be blamed on a build artifact rustc probed before creating it (its path appears in rustc's JSON artifact messages).",
+  "requires": ["cargo", "rustc"],
+  "command": ["cargo", "build", "--offline", "--quiet"],
+  "expect": { "status": "undetermined", "exit_code": 101, "forbidden_root_causes": ["file_missing", "parent_missing"] }
+}

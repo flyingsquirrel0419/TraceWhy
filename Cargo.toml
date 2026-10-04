@@ -1,0 +1,47 @@
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/flyingsquirrel0419/TraceWhy"
+homepage = "https://github.com/flyingsquirrel0419/TraceWhy"
+authors = ["TraceWhy contributors"]
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "1"
+regex = { version = "1", default-features = false, features = ["std", "perf", "unicode-perl", "unicode-case"] }
+libc = "0.2"
+toml = { version = "0.8", default-features = false, features = ["parse"] }
+
+tracewhy-event = { path = "crates/tracewhy-event", version = "1.0.0" }
+tracewhy-core = { path = "crates/tracewhy-core", version = "1.0.0" }
+tracewhy-graph = { path = "crates/tracewhy-graph", version = "1.0.0" }
+tracewhy-tracer-strace = { path = "crates/tracewhy-tracer-strace", version = "1.0.0" }
+tracewhy-engine = { path = "crates/tracewhy-engine", version = "1.0.0" }
+tracewhy-investigator-linux = { path = "crates/tracewhy-investigator-linux", version = "1.0.0" }
+tracewhy-investigator-docker = { path = "crates/tracewhy-investigator-docker", version = "1.0.0" }
+tracewhy-adapter-node = { path = "crates/tracewhy-adapter-node", version = "1.0.0" }
+tracewhy-adapter-python = { path = "crates/tracewhy-adapter-python", version = "1.0.0" }
+tracewhy-redact = { path = "crates/tracewhy-redact", version = "1.0.0" }
+tracewhy-format = { path = "crates/tracewhy-format", version = "1.0.0" }
+tracewhy-diff = { path = "crates/tracewhy-diff", version = "1.0.0" }
+tracewhy-report = { path = "crates/tracewhy-report", version = "1.0.0" }
+
+[workspace.lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"

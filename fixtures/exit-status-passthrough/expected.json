@@ -1,0 +1,5 @@
+{
+  "description": "The traced command's exit status is passed through unchanged, and arguments with spaces survive.",
+  "command": ["sh", "-c", "test \"$1\" = 'hello world' && exit 7", "argv0", "hello world"],
+  "expect": { "status": "undetermined", "exit_code": 7 }
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Scenario A: the executable does not exist anywhere on PATH.",
+  "command": ["tracewhy-nonexistent-command"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "command_not_in_path",
+    "minimum_confidence": "high",
+    "exit_code": 127,
+    "required_evidence": ["not found in", "PATH"]
+  }
+}

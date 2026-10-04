@@ -1,0 +1,12 @@
+{
+  "description": "Python: the module is installed in the project's .venv, but the system interpreter ran.",
+  "requires": ["python3"],
+  "command": ["python3", "main.py"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "python_venv_not_active",
+    "minimum_confidence": "high",
+    "exit_code": 1,
+    "required_evidence": ["installed in the project virtualenv"]
+  }
+}

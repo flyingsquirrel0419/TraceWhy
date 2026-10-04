@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/flyingsquirrel0419/TraceWhy/schemas/whytrace-v1.schema.json",
+  "title": "TraceWhy .whytrace (format version 1)",
+  "description": "A portable record of one traced run: semantic events, facts, hypotheses, cause graph and conclusion. Readers must ignore unknown properties (forward compatibility).",
+  "type": "object",
+  "required": ["format", "format_version", "tracewhy_version", "run", "conclusion"],
+  "properties": {
+    "format": { "const": "whytrace" },
+    "format_version": { "type": "integer", "minimum": 1, "maximum": 1 },
+    "tracewhy_version": { "type": "string" },
+    "run": { "$ref": "#/$defs/run" },
+    "environment": { "$ref": "#/$defs/environment" },
+    "process_tree": { "$ref": "#/$defs/process_tree" },
+    "events": { "type": "array", "items": { "$ref": "#/$defs/event" } },
+    "observations": { "type": "array", "items": { "$ref": "#/$defs/observation" } },
+    "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+    "graph": { "$ref": "#/$defs/graph" },
+    "investigations": { "type": "array", "items": { "$ref": "#/$defs/investigation" } },
+    "hypotheses": { "type": "array", "items": { "$ref": "#/$defs/hypothesis" } },
+    "conclusion": { "$ref": "#/$defs/conclusion" },
+    "stats": { "$ref": "#/$defs/stats" },
+    "redactions": {
+      "type": "object",
+      "required": ["applied"],
+      "properties": {
+        "applied": { "type": "boolean" },
+        "counts": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } }
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["message"],
+        "properties": { "line": { "type": ["integer", "null"] }, "message": { "type": "string" } }
+      }
+    }
+  },
+  "$defs": {
+    "exit_status": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "enum": ["exited", "killed"] },
+        "code": { "type": "integer" },
+        "signal": { "type": "string" },
+        "core_dumped": { "type": "boolean" }
+      }
+    },
+    "run": {
+      "type": "object",
+      "required": ["command", "cwd", "platform", "arch", "started_at", "duration_ms"],
+      "properties": {
+        "command": { "type": "array", "items": { "type": "string" } },
+        "cwd": { "type": "string" },
+        "platform": { "type": "string" },
+        "arch": { "type": "string" },
+        "kernel": { "type": "string" },
+        "started_at": { "type": "number" },
+        "duration_ms": { "type": "integer", "minimum": 0 },
+        "exit": { "$ref": "#/$defs/exit_status" },
+        "backend": {
+          "type": "object",
+          "required": ["name"],
+          "properties": { "name": { "type": "string" }, "version": { "type": "string" }, "capabilities": { "type": "object" } }
+        }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "variables": { "type": "object", "additionalProperties": { "type": ["string", "null"] } },
+        "fingerprints": { "type": "object", "additionalProperties": { "type": "string" } },
+        "path_dirs": { "type": "array", "items": { "type": "string" } },
+        "user": { "type": ["string", "null"] },
+        "uid": { "type": ["integer", "null"] }
+      }
+    },
+    "process_tree": {
+      "type": "object",
+      "properties": {
+        "root": { "type": "integer" },
+        "processes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["pid", "first_seq", "last_seq"],
+            "properties": {
+              "pid": { "type": "integer" },
+              "parent": { "type": "integer" },
+              "thread_of": { "type": "integer" },
+              "executable": { "type": "string" },
+              "args": { "type": "array", "items": { "type": "string" } },
+              "exit": { "$ref": "#/$defs/exit_status" },
+              "children": { "type": "array", "items": { "type": "integer" } }
+            }
+          }
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": ["seq", "pid", "kind"],
+      "properties": {
+        "seq": { "type": "integer", "minimum": 0 },
+        "ts": { "type": "number" },
+        "pid": { "type": "integer" },
+        "tgid": { "type": "integer" },
+        "source": { "type": "object", "properties": { "backend": { "type": "string" }, "line": { "type": "integer" } } },
+        "kind": {
+          "type": "object",
+          "required": ["type"],
+          "properties": {
+            "type": {
+              "enum": [
+                "process_spawned", "process_exec", "exec_failed", "process_exited", "process_killed",
+                "signal_received", "signal_sent", "file_opened", "file_open_failed", "path_op_failed",
+                "changed_directory", "connect_pending", "connected", "connect_failed", "bound", "bind_failed",
+                "listening", "dns_query", "dns_answer", "output", "write_failed", "syscall_failed"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "evidence_ref": {
+      "type": "object",
+      "required": ["type"],
+      "properties": { "type": { "enum": ["event", "observation", "fact"] }, "seq": { "type": "integer" }, "id": { "type": "integer" } }
+    },
+    "observation": {
+      "type": "object",
+      "required": ["id", "kind", "pid", "events", "relevance"],
+      "properties": {
+        "id": { "type": "integer" },
+        "kind": { "type": "object", "required": ["type"] },
+        "pid": { "type": "integer" },
+        "events": { "type": "array", "items": { "type": "integer" } },
+        "relevance": {
+          "type": "object",
+          "required": ["score"],
+          "properties": {
+            "score": { "type": "number", "minimum": 0, "maximum": 1 },
+            "on_failure_chain": { "type": "boolean" },
+            "reported_on_stderr": { "type": "boolean" },
+            "recovered": { "type": "boolean" },
+            "probe": { "type": "boolean" },
+            "terminal": { "type": "boolean" },
+            "reasons": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "fact": {
+      "type": "object",
+      "required": ["id", "kind", "source", "freshness", "confidence"],
+      "properties": {
+        "id": { "type": "integer" },
+        "kind": { "type": "object", "required": ["type"] },
+        "source": { "type": "object", "required": ["type"], "properties": { "type": { "enum": ["trace", "investigator", "adapter", "preflight"] } } },
+        "collected_at": { "type": "number" },
+        "freshness": { "enum": ["at_failure", "after_run"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "hypothesis": {
+      "type": "object",
+      "required": ["id", "kind", "observation", "status", "score", "title"],
+      "properties": {
+        "id": { "type": "integer" },
+        "kind": { "type": "string" },
+        "observation": { "type": "integer" },
+        "rule": { "type": "string" },
+        "status": { "enum": ["candidate", "supported", "refuted", "unresolved"] },
+        "score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "title": { "type": "string" },
+        "evidence_for": { "type": "array", "items": { "$ref": "#/$defs/evidence_ref" } },
+        "evidence_against": { "type": "array", "items": { "$ref": "#/$defs/evidence_ref" } },
+        "unresolved_questions": { "type": "array", "items": { "type": "object", "required": ["text"] } }
+      }
+    },
+    "investigation": {
+      "type": "object",
+      "required": ["investigator", "target", "round", "status", "duration_ms"],
+      "properties": {
+        "investigator": { "type": "string" },
+        "target": { "type": "object", "required": ["type"] },
+        "round": { "type": "integer" },
+        "status": { "enum": ["completed", "unavailable", "failed", "timed_out", "skipped"] },
+        "duration_ms": { "type": "integer" },
+        "facts": { "type": "array", "items": { "type": "integer" } },
+        "message": { "type": "string" }
+      }
+    },
+    "graph": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "kind", "key", "label"],
+            "properties": {
+              "id": { "type": "integer" },
+              "kind": {
+                "enum": ["command", "process", "file", "executable", "socket", "port", "host", "container", "service", "runtime",
+                         "environment_fact", "failure", "observation", "fact", "hypothesis", "cause"]
+              },
+              "key": { "type": "string" },
+              "label": { "type": "string" },
+              "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence_ref" } }
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["from", "to", "kind"],
+            "properties": {
+              "from": { "type": "integer" },
+              "to": { "type": "integer" },
+              "kind": {
+                "enum": ["spawned", "attempted", "opened", "resolved_to", "connected_to", "failed_with", "caused", "associated_with",
+                         "defined_by", "unavailable_because", "depends_on", "corroborates", "contradicts", "explains"]
+              },
+              "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence_ref" } }
+            }
+          }
+        },
+        "truncated": { "type": "boolean" }
+      }
+    },
+    "conclusion": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["succeeded", "root_cause", "undetermined"] },
+        "exit": { "$ref": "#/$defs/exit_status" },
+        "root_cause": {
+          "type": "object",
+          "required": ["kind", "title", "hypothesis", "observation"],
+          "properties": {
+            "kind": { "type": "string" },
+            "title": { "type": "string" },
+            "detail": { "type": "string" },
+            "hypothesis": { "type": "integer" },
+            "observation": { "type": "integer" }
+          }
+        },
+        "confidence": { "enum": ["high", "medium", "low"] },
+        "failing_process": { "type": "integer" },
+        "chain": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind", "label"],
+            "properties": {
+              "kind": { "enum": ["process", "action", "failure", "fact", "cause"] },
+              "label": { "type": "string" },
+              "inferred": { "type": "boolean" },
+              "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence_ref" } }
+            }
+          }
+        },
+        "evidence": { "type": "array", "items": { "type": "object", "required": ["text"] } },
+        "inferences": { "type": "array", "items": { "type": "string" } },
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind", "text"],
+            "properties": { "kind": { "enum": ["fix", "next_step"] }, "text": { "type": "string" }, "command": { "type": "string" } }
+          }
+        },
+        "alternatives": { "type": "array", "items": { "type": "object", "required": ["kind", "title", "confidence"] } },
+        "contributing": { "type": "array", "items": { "type": "string" } },
+        "stderr_excerpt": { "type": "string" }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "raw_lines": { "type": "integer" },
+        "raw_bytes": { "type": "integer" },
+        "raw_events": { "type": "integer" },
+        "semantic_events": { "type": "integer" },
+        "dropped_events": { "type": "integer" },
+        "unparsed_lines": { "type": "integer" },
+        "processes": { "type": "integer" },
+        "truncated": { "type": "boolean" }
+      }
+    }
+  }
+}

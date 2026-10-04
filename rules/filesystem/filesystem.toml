@@ -1,0 +1,65 @@
+# Filesystem failure rules.
+
+[[rule]]
+id = "filesystem.not-found"
+description = "A file or directory the program needed does not exist."
+observation = "file_access_failed"
+errors = ["ENOENT"]
+hypotheses = ["broken_symlink", "parent_missing", "file_missing", "path_exists_now"]
+investigate = ["path"]
+
+[[rule]]
+id = "filesystem.permission-denied"
+description = "Access to a path was denied."
+observation = "file_access_failed"
+errors = ["EACCES", "EPERM"]
+hypotheses = ["ancestor_not_searchable", "permission_denied", "operation_not_permitted"]
+investigate = ["path"]
+
+[[rule]]
+id = "filesystem.read-only"
+description = "A write was attempted on a read-only filesystem."
+observation = "file_access_failed"
+errors = ["EROFS"]
+hypotheses = ["read_only_filesystem"]
+investigate = ["filesystem"]
+
+[[rule]]
+id = "filesystem.bad-path"
+description = "A path is structurally wrong (not a directory, a loop, a directory)."
+observation = "file_access_failed"
+errors = ["ENOTDIR", "ELOOP", "EISDIR", "ENAMETOOLONG"]
+hypotheses = ["bad_path"]
+investigate = ["path"]
+
+[[rule]]
+id = "filesystem.disk-full"
+description = "The device ran out of space or inodes."
+observation = "write_failed"
+errors = ["ENOSPC"]
+hypotheses = ["inodes_exhausted", "disk_full", "disk_was_full"]
+investigate = ["filesystem"]
+
+[[rule]]
+id = "filesystem.quota"
+description = "A disk quota was exceeded."
+observation = "write_failed"
+errors = ["EDQUOT"]
+hypotheses = ["quota_exceeded"]
+investigate = ["filesystem"]
+
+[[rule]]
+id = "filesystem.io-error"
+description = "The device reported an I/O error or the file grew past its limit."
+observation = "write_failed"
+errors = ["EIO", "EFBIG", "EROFS"]
+hypotheses = ["write_device_error"]
+investigate = ["filesystem"]
+
+[[rule]]
+id = "filesystem.too-many-open-files"
+description = "The process or system ran out of file descriptors."
+observation = "resource_limit"
+errors = ["EMFILE", "ENFILE"]
+hypotheses = ["fd_limit_reached", "system_fd_table_full"]
+investigate = ["fd_limit"]

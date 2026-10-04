@@ -1,0 +1,19 @@
+[package]
+name = "tracewhy-diff"
+description = "Environment, execution and causal diff of .whytrace files"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+serde = { workspace = true }
+tracewhy-event = { workspace = true }
+tracewhy-core = { workspace = true }
+tracewhy-format = { workspace = true }

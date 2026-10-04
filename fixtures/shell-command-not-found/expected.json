@@ -1,0 +1,11 @@
+{
+  "description": "A shell script calls a tool that is not installed.",
+  "command": ["sh", "-c", "echo building; tracewhy-missing-tool --version"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "command_not_in_path",
+    "minimum_confidence": "high",
+    "exit_code": 127,
+    "required_evidence": ["tracewhy-missing-tool"]
+  }
+}

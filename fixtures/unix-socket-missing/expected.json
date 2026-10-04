@@ -1,0 +1,6 @@
+{
+  "description": "A client connects to a Unix socket whose server is not running.",
+  "requires": ["python3"],
+  "command": ["python3", "-c", "import socket; s=socket.socket(socket.AF_UNIX); s.connect('run/app.sock')"],
+  "expect": { "status": "root_cause", "root_cause": "socket_missing", "minimum_confidence": "high", "exit_code": 1, "required_evidence": ["app.sock"] }
+}

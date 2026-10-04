@@ -1,0 +1,12 @@
+{
+  "description": "Scenario G: a binary links against a shared library that is not installed.",
+  "requires": ["gcc"],
+  "command": ["./app"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "missing_shared_library",
+    "minimum_confidence": "high",
+    "exit_code": 127,
+    "required_evidence": ["libtwgreet.so.1"]
+  }
+}

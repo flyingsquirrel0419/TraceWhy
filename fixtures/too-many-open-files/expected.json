@@ -1,0 +1,12 @@
+{
+  "description": "The process exhausts its open-file limit (EMFILE).",
+  "requires": ["python3"],
+  "command": ["sh", "-c", "ulimit -n 32; exec python3 -c 'fs=[open(\"/dev/null\") for _ in range(100)]'"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "fd_limit_reached",
+    "minimum_confidence": "medium",
+    "exit_code": 1,
+    "required_evidence": ["EMFILE"]
+  }
+}

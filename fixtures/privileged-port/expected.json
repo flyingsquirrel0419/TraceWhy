@@ -1,0 +1,7 @@
+{
+  "description": "An unprivileged user binds a port below 1024.",
+  "requires": ["root", "python3"],
+  "as_user": "nobody",
+  "command": ["python3", "-c", "import socket; socket.socket().bind(('127.0.0.1', 81))"],
+  "expect": { "status": "root_cause", "root_cause": "privileged_port", "minimum_confidence": "high", "exit_code": 1, "required_evidence": ["EACCES"] }
+}

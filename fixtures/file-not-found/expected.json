@@ -1,0 +1,11 @@
+{
+  "description": "Scenario B: a program needs a file that does not exist.",
+  "command": ["cat", "data/settings.json"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "file_missing",
+    "minimum_confidence": "high",
+    "exit_code": 1,
+    "required_evidence": ["settings.json does not exist"]
+  }
+}

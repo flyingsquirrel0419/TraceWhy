@@ -1,0 +1,85 @@
+# Network failure rules.
+#
+# A rule maps an observation (a failure symptom seen in the trace) to the
+# hypotheses that could explain it, and to the targets worth investigating.
+# Rules never decide the root cause; hypotheses are scored against evidence.
+
+[[rule]]
+id = "network.connection-refused"
+description = "A TCP connection was actively refused by the peer."
+observation = "connect_failed"
+errors = ["ECONNREFUSED"]
+endpoint = "inet"
+hypotheses = [
+  "container_stopped",
+  "container_not_created",
+  "port_not_published",
+  "wrong_published_port",
+  "wrong_interface",
+  "startup_race",
+  "service_not_listening",
+  "remote_port_closed",
+]
+investigate = ["port", "local_addresses", "docker"]
+
+[[rule]]
+id = "network.unix-socket"
+description = "Connecting to a Unix domain socket failed."
+observation = "connect_failed"
+errors = ["ENOENT", "ECONNREFUSED", "EACCES"]
+endpoint = "unix"
+hypotheses = ["socket_missing", "socket_stale", "socket_permission"]
+investigate = ["path"]
+
+[[rule]]
+id = "network.unreachable"
+description = "The network or host could not be reached."
+observation = "connect_failed"
+errors = ["ENETUNREACH", "EHOSTUNREACH", "ETIMEDOUT", "EADDRNOTAVAIL"]
+endpoint = "inet"
+hypotheses = ["network_unreachable", "host_unreachable", "connect_timeout", "no_source_address"]
+investigate = ["network"]
+
+[[rule]]
+id = "network.address-in-use"
+description = "Binding a listening socket failed because the address is taken."
+observation = "bind_failed"
+errors = ["EADDRINUSE"]
+hypotheses = [
+  "port_held_by_traced_process",
+  "port_held_by_container",
+  "port_held_by_process",
+  "port_held_by_unknown",
+  "port_released",
+]
+investigate = ["port", "docker"]
+
+[[rule]]
+id = "network.bind-permission"
+description = "Binding a privileged port was not permitted."
+observation = "bind_failed"
+errors = ["EACCES", "EPERM"]
+hypotheses = ["privileged_port"]
+investigate = ["privileges"]
+
+[[rule]]
+id = "network.bind-address-unavailable"
+description = "The bind address is not assigned to this host."
+observation = "bind_failed"
+errors = ["EADDRNOTAVAIL"]
+hypotheses = ["address_not_local"]
+investigate = ["local_addresses"]
+
+[[rule]]
+id = "network.dns-failure"
+description = "A hostname could not be resolved."
+observation = "dns_failed"
+hypotheses = ["hostname_not_found", "dns_server_failure", "transient_dns_failure"]
+investigate = ["hostname"]
+
+[[rule]]
+id = "network.broken-pipe"
+description = "Writing to a pipe or socket whose reader has gone away."
+observation = "write_failed"
+errors = ["EPIPE", "ECONNRESET"]
+hypotheses = ["broken_pipe"]

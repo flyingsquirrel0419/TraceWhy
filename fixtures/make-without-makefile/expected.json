@@ -1,0 +1,6 @@
+{
+  "description": "Regression: `make` probes makefile/Makefile/GNUmakefile; its message \"no makefile found\" must not single out one probed name as the missing required file.",
+  "requires": ["make"],
+  "command": ["make"],
+  "expect": { "status": "undetermined", "exit_code": 2, "forbidden_root_causes": ["file_missing"] }
+}

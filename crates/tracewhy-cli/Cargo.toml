@@ -1,0 +1,38 @@
+[package]
+name = "tracewhy-cli"
+description = "TraceWhy - understand why a command failed"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+libc = { workspace = true }
+tracewhy-event = { workspace = true }
+tracewhy-core = { workspace = true }
+tracewhy-graph = { workspace = true }
+tracewhy-tracer-strace = { workspace = true }
+tracewhy-engine = { workspace = true }
+tracewhy-investigator-linux = { workspace = true }
+tracewhy-investigator-docker = { workspace = true }
+tracewhy-adapter-node = { workspace = true }
+tracewhy-adapter-python = { workspace = true }
+tracewhy-redact = { workspace = true }
+tracewhy-format = { workspace = true }
+tracewhy-diff = { workspace = true }
+tracewhy-report = { workspace = true }
+
+[[bin]]
+name = "why"
+path = "src/main.rs"
+
+[dev-dependencies]
+serde_json = { workspace = true }

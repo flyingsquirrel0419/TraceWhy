@@ -1,0 +1,12 @@
+{
+  "description": "Scenario D: connecting to a local port with no listener.",
+  "requires": ["python3"],
+  "command": ["python3", "client.py"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "service_not_listening",
+    "minimum_confidence": "high",
+    "exit_code": 1,
+    "required_evidence": ["ECONNREFUSED", "No process is listening on port 47913"]
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "description": "The port a server wants is already published by a running Docker container.",
+  "requires": ["docker", "docker-image:postgres:16-alpine", "python3", "port-free:47916"],
+  "command": ["python3", "-m", "http.server", "47916"],
+  "expect": { "status": "root_cause", "root_cause": "port_held_by_container", "minimum_confidence": "high", "exit_code": 1, "required_evidence": ["docker-proxy"] }
+}

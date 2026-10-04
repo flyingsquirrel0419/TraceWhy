@@ -1,0 +1,6 @@
+{
+  "description": "Creating files on a filesystem with free space but no free inodes.",
+  "requires": ["root", "mount"],
+  "command": ["sh", "-c", "for i in 1 2 3 4 5 6 7 8; do touch fs/f$i || exit 1; done"],
+  "expect": { "status": "root_cause", "root_cause": "inodes_exhausted", "minimum_confidence": "high", "exit_code": 1, "required_evidence": ["no free inodes"] }
+}

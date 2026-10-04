@@ -1,0 +1,5 @@
+{
+  "description": "False-positive guard: a successful command has nothing to explain.",
+  "command": ["ls", "/"],
+  "expect": { "status": "succeeded", "exit_code": 0 }
+}

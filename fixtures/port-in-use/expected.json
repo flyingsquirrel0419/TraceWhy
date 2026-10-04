@@ -1,0 +1,12 @@
+{
+  "description": "Scenario E: the port is already held by another process, which must be identified.",
+  "requires": ["python3"],
+  "command": ["python3", "-m", "http.server", "47914", "--bind", "127.0.0.1"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "port_held_by_process",
+    "minimum_confidence": "high",
+    "exit_code": 1,
+    "required_evidence": ["EADDRINUSE", "Port 47914 is held by"]
+  }
+}

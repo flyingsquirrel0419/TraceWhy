@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    name: build ${{ matrix.target }}
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-22.04
+          - target: aarch64-unknown-linux-gnu
+            os: ubuntu-22.04-arm
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      # Built on the oldest supported runner so the binary needs only an older glibc.
+      - name: Build
+        run: cargo build --release --locked --target ${{ matrix.target }}
+      - name: Test the built binary
+        run: |
+          sudo apt-get update && sudo apt-get install -y --no-install-recommends strace
+          ./target/${{ matrix.target }}/release/why --version
+          ./target/${{ matrix.target }}/release/why true
+      - name: Package
+        run: |
+          name=tracewhy-${GITHUB_REF_NAME}-${{ matrix.target }}
+          mkdir "$name"
+          cp target/${{ matrix.target }}/release/why README.md LICENSE-MIT LICENSE-APACHE "$name"/
+          tar czf "$name.tar.gz" "$name"
+          sha256sum "$name.tar.gz" > "$name.tar.gz.sha256"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.target }}
+          path: tracewhy-*.tar.gz*
+
+  release:
+    name: publish GitHub release
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+      - name: Combined checksums
+        run: cat *.sha256 > SHA256SUMS && cat SHA256SUMS
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            tracewhy-*.tar.gz
+            tracewhy-*.tar.gz.sha256
+            SHA256SUMS
+          generate_release_notes: true

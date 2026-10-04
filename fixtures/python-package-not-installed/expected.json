@@ -1,0 +1,6 @@
+{
+  "description": "Python: requirements.txt declares a package that is not installed for the interpreter that ran.",
+  "requires": ["python3"],
+  "command": ["python3", "app.py"],
+  "expect": { "status": "root_cause", "root_cause": "python_package_not_installed", "minimum_confidence": "high", "exit_code": 1, "required_evidence": ["requirements.txt declares"] }
+}

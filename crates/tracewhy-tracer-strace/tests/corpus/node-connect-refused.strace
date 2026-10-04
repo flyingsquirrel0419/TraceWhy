@@ -1,0 +1,85 @@
+355823 1791087545.684161 execve("/usr/bin/node", ["node", "-e", "require(\"net\").connect(5999,\"localhost\").on(\"error\",e=>{console.error(e.message);process.exit(1)})"], 0x7ffc531e5e58 /* 56 vars */) = 0
+355823 1791087545.685191 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+355823 1791087545.685610 openat(AT_FDCWD</home/user/proj>, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</etc/ld.so.cache>
+355823 1791087545.685907 openat(AT_FDCWD</home/user/proj>, "/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libdl.so.2>
+355823 1791087545.686266 openat(AT_FDCWD</home/user/proj>, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33>
+355823 1791087545.686624 openat(AT_FDCWD</home/user/proj>, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libm.so.6>
+355823 1791087545.686988 openat(AT_FDCWD</home/user/proj>, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgcc_s.so.1>
+355823 1791087545.687331 openat(AT_FDCWD</home/user/proj>, "/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libpthread.so.0>
+355823 1791087545.687755 openat(AT_FDCWD</home/user/proj>, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libc.so.6>
+355823 1791087545.729631 openat(AT_FDCWD</home/user/proj>, "/etc/ssl/openssl.cnf", O_RDONLY) = 3</etc/ssl/openssl.cnf>
+355823 1791087545.734041 openat(AT_FDCWD</home/user/proj>, "/proc/version_signature", O_RDONLY|O_CLOEXEC) = 4</proc/version_signature>
+355823 1791087545.734877 write(6<pipe:[3577260]>, "*", 1) = 1
+355823 1791087545.735562 clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x78dda30ef990, parent_tid=0x78dda30ef990, exit_signal=0, stack=0x78dda28ef000, stack_size=0x7ffdc0, tls=0x78dda30ef6c0} => {parent_tid=[355824]}, 88) = 355824
+355823 1791087545.736095 clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x78dda28ee990, parent_tid=0x78dda28ee990, exit_signal=0, stack=0x78dda20ee000, stack_size=0x7ffdc0, tls=0x78dda28ee6c0} => {parent_tid=[355825]}, 88) = 355825
+355823 1791087545.736357 clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x78dda20ed990, parent_tid=0x78dda20ed990, exit_signal=0, stack=0x78dda18ed000, stack_size=0x7ffdc0, tls=0x78dda20ed6c0} => {parent_tid=[355826]}, 88) = 355826
+355823 1791087545.736626 clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x78dda18ec990, parent_tid=0x78dda18ec990, exit_signal=0, stack=0x78dda10ec000, stack_size=0x7ffdc0, tls=0x78dda18ec6c0} => {parent_tid=[355827]}, 88) = 355827
+355823 1791087545.736905 clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x78dda10eb990, parent_tid=0x78dda10eb990, exit_signal=0, stack=0x78dda08eb000, stack_size=0x7ffdc0, tls=0x78dda10eb6c0} => {parent_tid=[355828]}, 88) = 355828
+355823 1791087545.745151 openat(AT_FDCWD</home/user/proj>, "/proc/self/maps", O_RDONLY|O_CLOEXEC) = 20</proc/355823/maps>
+355823 1791087545.745757 openat(AT_FDCWD</home/user/proj>, "/proc/self/cgroup", O_RDONLY|O_CLOEXEC) = 20</proc/355823/cgroup>
+355823 1791087545.745910 openat(AT_FDCWD</home/user/proj>, "/sys/fs/cgroup/user.slice/user-0.slice/user@0.service/tmux-spawn-3e6ab748-f67f-47e7-8313-5170fb889d95.scope/memory.max", O_RDONLY|O_CLOEXEC) = 20</sys/fs/cgroup/user.slice/user-0.slice/user@0.service/tmux-spawn-3e6ab748-f67f-47e7-8313-5170fb889d95.scope/memory.max>
+355823 1791087545.746105 openat(AT_FDCWD</home/user/proj>, "/sys/fs/cgroup/user.slice/user-0.slice/user@0.service/tmux-spawn-3e6ab748-f67f-47e7-8313-5170fb889d95.scope/memory.high", O_RDONLY|O_CLOEXEC) = 20</sys/fs/cgroup/user.slice/user-0.slice/user@0.service/tmux-spawn-3e6ab748-f67f-47e7-8313-5170fb889d95.scope/memory.high>
+355823 1791087545.746344 openat(AT_FDCWD</home/user/proj>, "/proc/meminfo", O_RDONLY|O_CLOEXEC) = 20</proc/meminfo>
+355823 1791087545.760409 readlink("/proc/self/exe", "/usr/bin/node", 8191) = 13
+355823 1791087545.766352 clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x78dda346d990, parent_tid=0x78dda346d990, exit_signal=0, stack=0x78dda3465000, stack_size=0x7dc0, tls=0x78dda346d6c0} => {parent_tid=[355829]}, 88) = 355829
+355823 1791087545.773526 getcwd("/home/user/proj", 4096) = 16
+355823 1791087545.785429 openat(AT_FDCWD</home/user/proj>, "/dev/null", O_RDONLY|O_CLOEXEC) = 20</dev/null<char 1:3>>
+355823 1791087545.788548 openat(AT_FDCWD</home/user/proj>, "/etc/resolv.conf", O_RDONLY) = 21</run/systemd/resolve/stub-resolv.conf>
+355823 1791087545.788871 openat(AT_FDCWD</home/user/proj>, "/etc/nsswitch.conf", O_RDONLY) = 21</etc/nsswitch.conf>
+355823 1791087545.789135 openat(AT_FDCWD</home/user/proj>, "/etc/netsvc.conf", O_RDONLY) = -1 ENOENT (No such file or directory)
+355823 1791087545.789161 openat(AT_FDCWD</home/user/proj>, "/etc/svc.conf", O_RDONLY) = -1 ENOENT (No such file or directory)
+355823 1791087545.789970 write(19<anon_inode:[eventfd]>, "\1\0\0\0\0\0\0\0", 8) = 8
+355823 1791087545.790331 clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x78dda08ea990, parent_tid=0x78dda08ea990, exit_signal=0, stack=0x78dda00ea000, stack_size=0x7ffdc0, tls=0x78dda08ea6c0} => {parent_tid=[355830]}, 88) = 355830
+355823 1791087545.790528 clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x78dd5bfff990, parent_tid=0x78dd5bfff990, exit_signal=0, stack=0x78dd5b7ff000, stack_size=0x7ffdc0, tls=0x78dd5bfff6c0} => {parent_tid=[355831]}, 88) = 355831
+355823 1791087545.790805 clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x78dd5b7fe990, parent_tid=0x78dd5b7fe990, exit_signal=0, stack=0x78dd5affe000, stack_size=0x7ffdc0, tls=0x78dd5b7fe6c0} => {parent_tid=[355832]}, 88) = 355832
+355823 1791087545.791028 clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x78dd5affd990, parent_tid=0x78dd5affd990, exit_signal=0, stack=0x78dd5a7fd000, stack_size=0x7ffdc0, tls=0x78dd5affd6c0} => {parent_tid=[355833]}, 88) = 355833
+355830 1791087545.791502 socket(AF_NETLINK, SOCK_RAW|SOCK_CLOEXEC, NETLINK_ROUTE) = 21<NETLINK:[3577266]>
+355830 1791087545.794259 bind(21<NETLINK:[3577266]>, {sa_family=AF_NETLINK, nl_pid=0, nl_groups=00000000}, 12) = 0
+355830 1791087545.794459 getsockname(21<NETLINK:[ROUTE:355823]>, {sa_family=AF_NETLINK, nl_pid=355823, nl_groups=00000000}, [12]) = 0
+355830 1791087545.794560 sendto(21<NETLINK:[ROUTE:355823]>, [{nlmsg_len=20, nlmsg_type=RTM_GETADDR, nlmsg_flags=NLM_F_REQUEST|NLM_F_DUMP, nlmsg_seq=1791087545, nlmsg_pid=0}, {ifa_family=AF_UNSPEC, ...}], 20, 0, {sa_family=AF_NETLINK, nl_pid=0, nl_groups=00000000}, 12) = 20
+355830 1791087545.794629 recvmsg(21<NETLINK:[ROUTE:355823]>, {msg_name={sa_family=AF_NETLINK, nl_pid=0, nl_groups=00000000}, msg_namelen=12, msg_iov=[{iov_base=[[{nlmsg_len=76, nlmsg_type=RTM_NEWADDR, nlmsg_flags=NLM_F_MULTI, nlmsg_seq=1791087545, nlmsg_pid=355823}, {ifa_family=AF_INET, ifa_prefixlen=8, ifa_flags=IFA_F_PERMANENT, ifa_scope=RT_SCOPE_HOST, ifa_index=if_nametoindex("lo")}, [[{nla_len=8, nla_type=IFA_ADDRESS}, inet_addr("127.0.0.1")], [{nla_len=8, nla_type=IFA_LOCAL}, inet_addr("127.0.0.1")], [{nla_len=7, nla_type=IFA_LABEL}, "lo"], [{nla_len=8, nla_type=IFA_FLAGS}, IFA_F_PERMANENT], [{nla_len=20, nla_type=IFA_CACHEINFO}, {ifa_prefered=4294967295, ifa_valid=4294967295, cstamp=311, tstamp=311}]]], [{nlmsg_len=88, nlmsg_type=RTM_NEWADDR, nlmsg_flags=NLM_F_MULTI, nlmsg_seq=1791087545, nlmsg_pid=355823}, {ifa_family=AF_INET, ifa_prefixlen=24, ifa_flags=IFA_F_PERMANENT, ifa_scope=RT_SCOPE_UNIVERSE, ifa_index=if_nametoindex("ens3")}, [[{nla_len=8, nla_type=IFA_ADDRESS}, inet_addr("158.51.109.232")], [{nla_len=8, nla_type=IFA_LOCAL}, inet_addr("158.51.109.232")], [{nla_len=8, nla_type=IFA_BROADCAST}, inet_addr("158.51.109.255")], [{nla_len=9, nla_type=IFA_LABEL}, "ens3"], [{nla_len=8, nla_type=IFA_FLAGS}, IFA_F_PERMANENT], [{nla_len=20, nla_type=IFA_CACHEINFO}, {ifa_prefered=4294967295, ifa_valid=4294967295, cstamp=983, tstamp=983}]]], [{nlmsg_len=84, nlmsg_type=RTM_NEWADDR, nlmsg_flags=NLM_F_MULTI, nlmsg_seq=1791087545, nlmsg_pid=355823}, {ifa_family=AF_INET, ifa_prefixlen=32, ifa_flags=IFA_F_PERMANENT, ifa_scope=RT_SCOPE_UNIVERSE, ifa_index=if_nametoindex("tailscale0")}, [[{nla_len=8, nla_type=IFA_ADDRESS}, inet_addr("100.101.131.99")], [{nla_len=8, nla_type=IFA_LOCAL}, inet_addr("100.101.131.99")], [{nla_len=15, nla_type=IFA_LABEL}, "tailscale0"], [{nla_len=8, nla_type=IFA_FLAGS}, IFA_F_PERMANENT], [{nla_len=20, nla_type=IFA_CACHEINFO}, {ifa_prefered=4294967295, ifa_valid=4294967295, cstamp=1555, tstamp=1555}]]], [{nlmsg_len=88, nlmsg_type=RTM_NEWADDR, nlmsg_flags=NLM_F_MULTI, nlmsg_seq=1791087545, nlmsg_pid=355823}, {ifa_family=AF_INET, ifa_prefixlen=16, ifa_flags=IFA_F_PERMANENT, ifa_scope=RT_SCOPE_UNIVERSE, ifa_index=if_nametoindex("docker0")}, [[{nla_len=8, nla_type=IFA_ADDRESS}, inet_addr("172.17.0.1")], [{nla_len=8, nla_type=IFA_LOCAL}, inet_addr("172.17.0.1")], [{nla_len=8, nla_type=IFA_BROADCAST}, inet_addr("172.17.255.255")], [{nla_len=12, nla_type=IFA_LABEL}, "docker0"], [{nla_len=8, nla_type=IFA_FLAGS}, IFA_F_PERMANENT], [{nla_len=20, nla_type=IFA_CACHEINFO}, {ifa_prefered=4294967295, ifa_valid=4294967295, cstamp=1443, tstamp=1443}]]]], iov_len=4096}], msg_iovlen=1, msg_controllen=0, msg_flags=0}, 0) = 336
+355830 1791087545.794917 recvmsg(21<NETLINK:[ROUTE:355823]>, {msg_name={sa_family=AF_NETLINK, nl_pid=0, nl_groups=00000000}, msg_namelen=12, msg_iov=[{iov_base=[[{nlmsg_len=72, nlmsg_type=RTM_NEWADDR, nlmsg_flags=NLM_F_MULTI, nlmsg_seq=1791087545, nlmsg_pid=355823}, {ifa_family=AF_INET6, ifa_prefixlen=128, ifa_flags=IFA_F_PERMANENT, ifa_scope=RT_SCOPE_HOST, ifa_index=if_nametoindex("lo")}, [[{nla_len=20, nla_type=IFA_ADDRESS}, inet_pton(AF_INET6, "::1")], [{nla_len=20, nla_type=IFA_CACHEINFO}, {ifa_prefered=4294967295, ifa_valid=4294967295, cstamp=311, tstamp=311}], [{nla_len=8, nla_type=IFA_FLAGS}, IFA_F_PERMANENT|IFA_F_NOPREFIXROUTE]]], [{nlmsg_len=72, nlmsg_type=RTM_NEWADDR, nlmsg_flags=NLM_F_MULTI, nlmsg_seq=1791087545, nlmsg_pid=355823}, {ifa_family=AF_INET6, ifa_prefixlen=64, ifa_flags=IFA_F_PERMANENT, ifa_scope=RT_SCOPE_UNIVERSE, ifa_index=if_nametoindex("ens3")}, [[{nla_len=20, nla_type=IFA_ADDRESS}, inet_pton(AF_INET6, "2602:fd6f:100:62::a")], [{nla_len=20, nla_type=IFA_CACHEINFO}, {ifa_prefered=4294967295, ifa_valid=4294967295, cstamp=983, tstamp=983}], [{nla_len=8, nla_type=IFA_FLAGS}, IFA_F_PERMANENT]]], [{nlmsg_len=80, nlmsg_type=RTM_NEWADDR, nlmsg_flags=NLM_F_MULTI, nlmsg_seq=1791087545, nlmsg_pid=355823}, {ifa_family=AF_INET6, ifa_prefixlen=64, ifa_flags=IFA_F_PERMANENT, ifa_scope=RT_SCOPE_LINK, ifa_index=if_nametoindex("ens3")}, [[{nla_len=20, nla_type=IFA_ADDRESS}, inet_pton(AF_INET6, "fe80::2e6:78ff:fe9b:8269")], [{nla_len=20, nla_type=IFA_CACHEINFO}, {ifa_prefered=4294967295, ifa_valid=4294967295, cstamp=982, tstamp=982}], [{nla_len=8, nla_type=IFA_FLAGS}, IFA_F_PERMANENT], [{nla_len=5, nla_type=IFA_PROTO}, "\x03"]]], [{nlmsg_len=72, nlmsg_type=RTM_NEWADDR, nlmsg_flags=NLM_F_MULTI, nlmsg_seq=1791087545, nlmsg_pid=355823}, {ifa_family=AF_INET6, ifa_prefixlen=128, ifa_flags=IFA_F_PERMANENT, ifa_scope=RT_SCOPE_UNIVERSE, ifa_index=if_nametoindex("tailscale0")}, [[{nla_len=20, nla_type=IFA_ADDRESS}, inet_pton(AF_INET6, "fd7a:115c:a1e0::4801:83c0")], [{nla_len=20, nla_type=IFA_CACHEINFO}, {ifa_prefered=4294967295, ifa_valid=4294967295, cstamp=1555, tstamp=1555}], [{nla_len=8, nla_type=IFA_FLAGS}, IFA_F_PERMANENT]]], [{nlmsg_len=80, nlmsg_type=RTM_NEWADDR, nlmsg_flags=NLM_F_MULTI, nlmsg_seq=1791087545, nlmsg_pid=355823}, {ifa_family=AF_INET6, ifa_prefixlen=64, ifa_flags=IFA_F_PERMANENT, ifa_scope=RT_SCOPE_LINK, ifa_index=if_nametoindex("tailscale0")}, [[{nla_len=20, nla_type=IFA_ADDRESS}, inet_pton(AF_INET6, "fe80::4803:f536:2f0:3f3b")], [{nla_len=20, nla_type=IFA_CACHEINFO}, {ifa_prefered=4294967295, ifa_valid=4294967295, cstamp=1356, tstamp=1356}], [{nla_len=8, nla_type=IFA_FLAGS}, IFA_F_PERMANENT|IFA_F_STABLE_PRIVACY], [{nla_len=5, nla_type=IFA_PROTO}, "\x03"]]]], iov_len=4096}], msg_iovlen=1, msg_controllen=0, msg_flags=0}, 0) = 376
+355830 1791087545.795063 recvmsg(21<NETLINK:[ROUTE:355823]>, {msg_name={sa_family=AF_NETLINK, nl_pid=0, nl_groups=00000000}, msg_namelen=12, msg_iov=[{iov_base=[{nlmsg_len=20, nlmsg_type=NLMSG_DONE, nlmsg_flags=NLM_F_MULTI, nlmsg_seq=1791087545, nlmsg_pid=355823}, 0], iov_len=4096}], msg_iovlen=1, msg_controllen=0, msg_flags=0}, 0) = 20
+355830 1791087545.795159 socket(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 22<UNIX-STREAM:[3577267]>
+355830 1791087545.795303 connect(22<UNIX-STREAM:[3577267]>, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+355830 1791087545.795470 socket(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 21<UNIX-STREAM:[3577268]>
+355830 1791087545.795546 connect(21<UNIX-STREAM:[3577268]>, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+355830 1791087545.795674 newfstatat(AT_FDCWD</home/user/proj>, "/etc/nsswitch.conf", {st_mode=S_IFREG|0644, st_size=558, ...}, 0) = 0
+355830 1791087545.795772 newfstatat(AT_FDCWD</home/user/proj>, "/", {st_mode=S_IFDIR|0755, st_size=4096, ...}, 0) = 0
+355830 1791087545.795828 openat(AT_FDCWD</home/user/proj>, "/etc/nsswitch.conf", O_RDONLY|O_CLOEXEC) = 21</etc/nsswitch.conf>
+355830 1791087545.796146 newfstatat(AT_FDCWD</home/user/proj>, "/etc/resolv.conf", {st_mode=S_IFREG|0644, st_size=936, ...}, 0) = 0
+355830 1791087545.796211 openat(AT_FDCWD</home/user/proj>, "/etc/host.conf", O_RDONLY|O_CLOEXEC) = 21</etc/host.conf>
+355830 1791087545.796478 openat(AT_FDCWD</home/user/proj>, "/etc/resolv.conf", O_RDONLY|O_CLOEXEC) = 21</run/systemd/resolve/stub-resolv.conf>
+355830 1791087545.796730 openat(AT_FDCWD</home/user/proj>, "/etc/hosts", O_RDONLY|O_CLOEXEC) = 21</etc/hosts>
+355830 1791087545.796985 write(19<anon_inode:[eventfd]>, "\1\0\0\0\0\0\0\0", 8) = 8
+355823 1791087545.797458 socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 21<TCP:[3576829]>
+355823 1791087545.798520 connect(21<TCP:[3576829]>, {sa_family=AF_INET, sin_port=htons(5999), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+355823 1791087545.799651 getsockopt(21<TCP:[3576829]>, SOL_SOCKET, SO_ERROR, [ECONNREFUSED], [4]) = 0
+355823 1791087545.801917 write(2</dev/pts/0>, "connect ECONNREFUSED 127.0.0.1:5999\n", 36) = 36
+355831 1791087545.802344 exit(0)        = ?
+355832 1791087545.802430 exit(0 <unfinished ...>
+355831 1791087545.802449 +++ exited with 0 +++
+355832 1791087545.802460 <... exit resumed>) = ?
+355833 1791087545.802476 exit(0 <unfinished ...>
+355832 1791087545.802488 +++ exited with 0 +++
+355833 1791087545.802497 <... exit resumed>) = ?
+355830 1791087545.802503 exit(0 <unfinished ...>
+355833 1791087545.802516 +++ exited with 0 +++
+355830 1791087545.802524 <... exit resumed>) = ?
+355830 1791087545.802559 +++ exited with 0 +++
+355828 1791087545.802654 exit(0)        = ?
+355828 1791087545.802670 +++ exited with 0 +++
+355827 1791087545.802743 exit(0)        = ?
+355823 1791087545.802781 write(14<anon_inode:[eventfd]>, "\1\0\0\0\0\0\0\0", 8 <unfinished ...>
+355827 1791087545.802793 +++ exited with 0 +++
+355823 1791087545.802807 <... write resumed>) = 8
+355825 1791087545.802832 exit(0 <unfinished ...>
+355826 1791087545.802835 exit(0)        = ?
+355825 1791087545.802851 <... exit resumed>) = ?
+355826 1791087545.802864 +++ exited with 0 +++
+355825 1791087545.802866 +++ exited with 0 +++
+355824 1791087545.802945 exit(0)        = ?
+355824 1791087545.802963 +++ exited with 0 +++
+355823 1791087545.803564 exit_group(1)  = ?
+355829 1791087545.803716 +++ exited with 1 +++
+355823 1791087545.804868 +++ exited with 1 +++

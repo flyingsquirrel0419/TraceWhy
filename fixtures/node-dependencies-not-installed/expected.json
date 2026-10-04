@@ -1,0 +1,12 @@
+{
+  "description": "Node.js: a declared dependency is missing because node_modules was never installed.",
+  "requires": ["node"],
+  "command": ["node", "index.js"],
+  "expect": {
+    "status": "root_cause",
+    "root_cause": "node_dependencies_not_installed",
+    "minimum_confidence": "high",
+    "exit_code": 1,
+    "required_evidence": ["node_modules does not exist"]
+  }
+}

@@ -1,0 +1,21 @@
+[package]
+name = "tracewhy-report"
+description = "Terminal and JSON reports for TraceWhy"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracewhy-event = { workspace = true }
+tracewhy-core = { workspace = true }
+tracewhy-format = { workspace = true }
+tracewhy-diff = { workspace = true }

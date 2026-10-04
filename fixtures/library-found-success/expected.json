@@ -1,0 +1,7 @@
+{
+  "description": "False-positive guard: the loader probes several directories before finding the library; the run succeeds.",
+  "requires": ["gcc"],
+  "command": ["./app"],
+  "env": {"LD_LIBRARY_PATH": "/nonexistent/a:/nonexistent/b:vendor"},
+  "expect": { "status": "succeeded", "exit_code": 0 }
+}

@@ -1,0 +1,10 @@
+{
+  "description": "False-positive guard: an optional .env is missing and the program later fails for an unrelated, unobservable reason. The missing file must not be blamed.",
+  "requires": ["python3"],
+  "command": ["python3", "app.py"],
+  "expect": {
+    "status": "undetermined",
+    "exit_code": 3,
+    "forbidden_root_causes": ["file_missing", "parent_missing"]
+  }
+}

@@ -1,0 +1,50 @@
+# Process / exec failure rules.
+
+[[rule]]
+id = "process.command-not-found"
+description = "An executable could not be found."
+observation = "exec_failed"
+errors = ["ENOENT"]
+hypotheses = [
+  "broken_symlink",
+  "missing_interpreter",
+  "explicit_path_missing",
+  "command_not_in_path",
+]
+investigate = ["executable", "path", "elf"]
+
+[[rule]]
+id = "process.exec-permission"
+description = "An executable could not be executed due to permissions."
+observation = "exec_failed"
+errors = ["EACCES", "EPERM"]
+hypotheses = ["is_directory", "not_executable", "noexec_mount", "ancestor_not_searchable"]
+investigate = ["executable", "path", "filesystem"]
+
+[[rule]]
+id = "process.exec-format"
+description = "The kernel could not execute the file format."
+observation = "exec_failed"
+errors = ["ENOEXEC"]
+hypotheses = ["wrong_architecture", "not_an_executable"]
+investigate = ["elf"]
+
+[[rule]]
+id = "process.text-busy"
+description = "The executable is open for writing by another process."
+observation = "exec_failed"
+errors = ["ETXTBSY"]
+hypotheses = ["executable_busy"]
+
+[[rule]]
+id = "process.crash"
+description = "A process was terminated by a signal."
+observation = "process_crashed"
+hypotheses = ["killed_by_traced_process", "process_crashed", "killed_externally"]
+
+[[rule]]
+id = "process.shared-library"
+description = "The dynamic loader could not load a shared library."
+observation = "library_load_failed"
+hypotheses = ["library_wrong_architecture", "library_outside_search_path", "missing_shared_library"]
+investigate = ["library"]
