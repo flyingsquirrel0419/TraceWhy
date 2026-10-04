@@ -59,7 +59,10 @@ jobs:
             "TRACEWHY_FIXTURE_TRACES_DIR=$RUNNER_TEMP/traces" \
             cargo test -p tracewhy-cli --test fixtures --locked
       - name: Validate recorded traces against the JSON schema
-        run: python3 scripts/validate-whytrace.py "$RUNNER_TEMP/traces"
+        run: |
+          # Traces are written 0600 by the root fixture run; hand them back.
+          sudo chown -R "$(id -u):$(id -g)" "$RUNNER_TEMP/traces"
+          python3 scripts/validate-whytrace.py "$RUNNER_TEMP/traces"
       - name: Release build
         run: cargo build --release --locked
       - name: Smoke test the release binary
