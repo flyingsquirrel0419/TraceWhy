@@ -493,3 +493,80 @@ fn large_event_streams_analyze_quickly() {
     );
     assert!(a.graph.nodes.len() <= engine.limits.max_graph_nodes);
 }
+
+#[test]
+fn port_held_by_container_without_visible_pid() {
+    // Unprivileged users cannot see the root-owned docker-proxy; Docker's view decides.
+    let ep = Endpoint::Inet {
+        address: "0.0.0.0".parse().unwrap(),
+        port: 8080,
+    };
+    let events = vec![
+        ev(
+            0,
+            10,
+            EventKind::ProcessExec {
+                executable: "/usr/bin/python3".into(),
+                args: vec!["python3".into()],
+            },
+        ),
+        ev(
+            1,
+            10,
+            EventKind::BindFailed {
+                endpoint: ep,
+                protocol: Protocol::Tcp,
+                error: Errno::new("EADDRINUSE"),
+            },
+        ),
+        ev(
+            2,
+            10,
+            EventKind::Output {
+                stream: OutputStream::Stderr,
+                text: "OSError: [Errno 98] Address already in use\n".into(),
+            },
+        ),
+        ev(3, 10, EventKind::ProcessExited { code: 1 }),
+    ];
+    let hidden = Listener {
+        address: "0.0.0.0".parse().unwrap(),
+        pid: None,
+        executable: None,
+        cmdline: None,
+    };
+    let (p, _) = mock(
+        "port",
+        is_port,
+        vec![FactKind::PortListeners {
+            port: 8080,
+            listeners: vec![hidden],
+        }],
+    );
+    let (d, _) = mock(
+        "docker",
+        is_docker,
+        vec![FactKind::ContainerState {
+            project: None,
+            service: "web".into(),
+            container: Some("web".into()),
+            state: "running".into(),
+            exit_code: None,
+            health: None,
+            published: vec![PortMapping {
+                host_ip: Some("0.0.0.0".into()),
+                host_port: Some(8080),
+                container_port: 80,
+                protocol: "tcp".into(),
+            }],
+            oom_killed: false,
+        }],
+    );
+    let engine = Engine::new(vec![p, d], vec![]);
+    let a = analyze(&engine, &events, true);
+    assert_eq!(
+        a.conclusion.root_cause.as_ref().unwrap().kind,
+        "port_held_by_container"
+    );
+    assert_eq!(a.conclusion.confidence, Some(Confidence::High));
+}

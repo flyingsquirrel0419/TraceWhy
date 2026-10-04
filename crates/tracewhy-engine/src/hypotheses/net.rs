@@ -230,6 +230,32 @@ fn bind(kind: &str, ctx: &Ctx<'_>, endpoint: &Endpoint, err: &str) -> Option<Eva
             )
         }
         ("port_held_by_container", "EADDRINUSE") => {
+            // Docker's own view is authoritative; it works even when the
+            // root-owned docker-proxy is invisible to an unprivileged user.
+            if let Some((cid, service, name)) = container_publishing(ctx, port) {
+                let compose = ctx.facts.compose_services().into_iter().find(|(_, _, s)| {
+                    s.name == service && s.ports.iter().any(|p| p.host_port == Some(port))
+                });
+                let mut e = Eval::new(format!(
+                    "Port {port} is already published by Docker container \"{name}\"."
+                ))
+                .fact(cid, ctx)
+                .step(format!("container {name} publishes :{port}"), Some(cid))
+                .supported(0.92);
+                if let Some((lid, _)) = listeners {
+                    e = e.fact(lid, ctx);
+                }
+                return Some(match compose {
+                    Some((cf, file, s)) => e.fact(cf, ctx).next(
+                        "Stop the container (or change its published port) before starting this program",
+                        Some(compose_cmd(&file, ctx, &format!("stop {}", shell_quote(&s.name)))),
+                    ),
+                    None => e.next(
+                        "Stop the container publishing this port, or use another port",
+                        Some(format!("docker stop {}", shell_quote(&name))),
+                    ),
+                });
+            }
             if let Some((lid, ls)) = listeners {
                 if let Some(l) = ls.iter().find(|l| {
                     l.executable
@@ -308,6 +334,9 @@ fn bind(kind: &str, ctx: &Ctx<'_>, endpoint: &Endpoint, err: &str) -> Option<Eva
             ))
         }
         ("port_held_by_unknown", "EADDRINUSE") => {
+            if container_publishing(ctx, port).is_some() {
+                return None;
+            }
             let (lid, ls) = listeners?;
             if ls.is_empty() || ls.iter().any(|l| l.pid.is_some()) {
                 return None;
@@ -479,4 +508,30 @@ fn dns(kind: &str, ctx: &Ctx<'_>, host: &str, rcode: Option<DnsRcode>) -> Option
         }
         _ => None,
     }
+}
+
+/// A running container that publishes `port` on the host: (fact, service, container name).
+fn container_publishing(
+    ctx: &Ctx<'_>,
+    port: u16,
+) -> Option<(tracewhy_core::FactId, String, String)> {
+    ctx.facts
+        .of_type("container_state")
+        .into_iter()
+        .find_map(|f| match &f.kind {
+            FactKind::ContainerState {
+                service,
+                container,
+                state,
+                published,
+                ..
+            } if state == "running" && published.iter().any(|m| m.host_port == Some(port)) => {
+                Some((
+                    f.id,
+                    service.clone(),
+                    container.clone().unwrap_or_else(|| service.clone()),
+                ))
+            }
+            _ => None,
+        })
 }
